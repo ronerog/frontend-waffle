@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Box, Typography, Paper, Container, Grid, CircularProgress } from "@mui/material";
+import { Star } from "@mui/icons-material";
 import axios from "axios";
 import Header from "../components/Header";
 
@@ -70,14 +71,25 @@ const Home = () => {
             </Box>
           ) : (
             <>
-              <Paper elevation={3} sx={{ p: { xs: 2, md: 3 }, textAlign: "center", mb: 3, minHeight: '130px' }}>
+              <Paper
+                elevation={3}
+                sx={{
+                  p: { xs: 2, md: 3 },
+                  textAlign: "center",
+                  mb: 3,
+                  minHeight: "150px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
                 <Typography variant="h6" sx={{ fontWeight: "bold", color: "#240E0B" }}>
                   Seu Streak Atual
                 </Typography>
                 <Typography variant="h3" sx={{ color: "#FFCE04", mt: 1 }}>
                   {streakAtual} dias
                 </Typography>
-
                 <Typography sx={{ mt: 1, fontSize: { xs: "14px", sm: "16px" } }}>
                   {streakAtual === 0
                     ? "Vamos aumentar esse streak aí, faça já uma leitura diária!"
@@ -87,20 +99,30 @@ const Home = () => {
                 </Typography>
               </Paper>
 
-              <Paper elevation={3} sx={{ p: { xs: 2, md: 3 }, textAlign: "center", mb: 3, minHeight: '130px' }}>
+              <Paper
+                elevation={3}
+                sx={{
+                  p: { xs: 2, md: 3 },
+                  textAlign: "center",
+                  mb: 3,
+                  minHeight: "150px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
                 <Typography variant="h6" sx={{ fontWeight: "bold", color: "#240E0B" }}>
                   Progresso de Níveis
                 </Typography>
-                <Box sx={{ display: "flex", justifyContent: "center", mt: 2, flexWrap: "wrap" }}>
+                <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
                   {Array.from({ length: 5 }).map((_, index) => (
-                    <Box
+                    <Star
                       key={index}
                       sx={{
-                        width: { xs: 20, sm: 30 },
-                        height: { xs: 20, sm: 30 },
-                        mx: 1,
-                        borderRadius: "50%",
-                        backgroundColor: index < Math.min(streakAtual, 5) ? "#FFCE04" : "#bdbdbd",
+                        fontSize: { xs: 30, sm: 40 },
+                        mx: 0.5,
+                        color: index < Math.min(streakAtual, 5) ? "#FFCE04" : "#bdbdbd",
                       }}
                     />
                   ))}
@@ -110,11 +132,22 @@ const Home = () => {
                 </Typography>
               </Paper>
 
-              <Paper elevation={3} sx={{ p: { xs: 2, md: 3 }, mb: 3, minHeight: '130px' }}>
-                <Typography variant="h6" sx={{ fontWeight: "bold", textAlign: "center", color: "#240E0B" }}>
+              <Paper
+                elevation={3}
+                sx={{
+                  p: { xs: 2, md: 3 },
+                  mb: 3,
+                  minHeight: "150px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Typography variant="h6" sx={{ fontWeight: "bold", color: "#240E0B" }}>
                   Histórico de Aberturas
                 </Typography>
-                <Grid container justifyContent="center" sx={{ mt: 2, flexWrap: "wrap" }}>
+                <Grid container justifyContent="center" sx={{ mt: 2 }}>
                   {historicoAberturas.map((item, index) => (
                     <Box
                       key={index}
@@ -131,8 +164,18 @@ const Home = () => {
                 </Grid>
               </Paper>
 
-              <Paper elevation={3} sx={{ p: { xs: 2, md: 3 }, minHeight: '130px' }}>
-                <Typography variant="h6" sx={{ fontWeight: "bold", textAlign: "center", color: "#240E0B" }}>
+              <Paper
+                elevation={3}
+                sx={{
+                  p: { xs: 2, md: 3 },
+                  minHeight: "150px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Typography variant="h6" sx={{ fontWeight: "bold", color: "#240E0B" }}>
                   Motivação do Dia
                 </Typography>
                 <Typography variant="body1" sx={{ mt: 2, textAlign: "center", fontSize: { xs: "14px", sm: "16px" } }}>
