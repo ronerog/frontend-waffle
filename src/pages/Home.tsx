@@ -40,26 +40,27 @@ const Home = () => {
   return (
     <>
       <Header />
+
       <Typography
         variant="h4"
         sx={{
           fontWeight: "bolder",
           color: "#240E0B",
-          mt: 10,
+          mt: { xs: 5, md: 10 },
           textShadow: "0.5px 0.5px 1.5px white",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          textAlign: "center",
+          px: { xs: 2, sm: 4 },
         }}
       >
         Olá, será que você está informado o suficiente?
       </Typography>
+
       <Box
         sx={{
           minHeight: "calc(100vh - 55px)",
           backgroundColor: "#ffffff",
           color: "#000000",
-          padding: 15,
+          padding: { xs: 3, sm: 5, md: 10 },
         }}
       >
         <Container maxWidth="md">
@@ -69,34 +70,34 @@ const Home = () => {
             </Box>
           ) : (
             <>
-              <Paper elevation={3} sx={{ p: 3, textAlign: "center", mb: 3 }}>
-                <Typography variant="h5" sx={{ fontWeight: "bold", color: "#240E0B" }}>
+              <Paper elevation={3} sx={{ p: { xs: 2, md: 3 }, textAlign: "center", mb: 3, minHeight: '130px' }}>
+                <Typography variant="h6" sx={{ fontWeight: "bold", color: "#240E0B" }}>
                   Seu Streak Atual
                 </Typography>
                 <Typography variant="h3" sx={{ color: "#FFCE04", mt: 1 }}>
                   {streakAtual} dias
                 </Typography>
 
-                <Typography sx={{ mt: 1 }}>
+                <Typography sx={{ mt: 1, fontSize: { xs: "14px", sm: "16px" } }}>
                   {streakAtual === 0
                     ? "Vamos aumentar esse streak aí, faça já uma leitura diária!"
                     : streakAtual < 5
-                      ? "Você está indo bem, continue se informando!"
-                      : "Sua informação é mais de 9000! Você está muito informado!"}
+                    ? "Você está indo bem, continue se informando!"
+                    : "Sua informação é mais de 9000! Você está muito informado!"}
                 </Typography>
               </Paper>
 
-              <Paper elevation={3} sx={{ p: 3, textAlign: "center", mb: 3 }}>
-                <Typography variant="h5" sx={{ fontWeight: "bold", color: "#240E0B" }}>
+              <Paper elevation={3} sx={{ p: { xs: 2, md: 3 }, textAlign: "center", mb: 3, minHeight: '130px' }}>
+                <Typography variant="h6" sx={{ fontWeight: "bold", color: "#240E0B" }}>
                   Progresso de Níveis
                 </Typography>
-                <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
+                <Box sx={{ display: "flex", justifyContent: "center", mt: 2, flexWrap: "wrap" }}>
                   {Array.from({ length: 5 }).map((_, index) => (
                     <Box
                       key={index}
                       sx={{
-                        width: 30,
-                        height: 30,
+                        width: { xs: 20, sm: 30 },
+                        height: { xs: 20, sm: 30 },
                         mx: 1,
                         borderRadius: "50%",
                         backgroundColor: index < Math.min(streakAtual, 5) ? "#FFCE04" : "#bdbdbd",
@@ -104,22 +105,22 @@ const Home = () => {
                     />
                   ))}
                 </Box>
-                <Typography sx={{ mt: 1 }}>
+                <Typography sx={{ mt: 1, fontSize: { xs: "14px", sm: "16px" } }}>
                   {streakAtual >= 10 ? "Você atingiu o nível máximo!" : "Continue para chegar ao próximo nível!"}
                 </Typography>
               </Paper>
 
-              <Paper elevation={3} sx={{ p: 3, mb: 3 }}>
-                <Typography variant="h5" sx={{ fontWeight: "bold", textAlign: "center", color: "#240E0B" }}>
+              <Paper elevation={3} sx={{ p: { xs: 2, md: 3 }, mb: 3, minHeight: '130px' }}>
+                <Typography variant="h6" sx={{ fontWeight: "bold", textAlign: "center", color: "#240E0B" }}>
                   Histórico de Aberturas
                 </Typography>
-                <Grid container justifyContent="center" sx={{ mt: 2 }}>
+                <Grid container justifyContent="center" sx={{ mt: 2, flexWrap: "wrap" }}>
                   {historicoAberturas.map((item, index) => (
                     <Box
                       key={index}
                       sx={{
-                        width: 20,
-                        height: 20,
+                        width: { xs: 15, sm: 20 },
+                        height: { xs: 15, sm: 20 },
                         backgroundColor: "#FFCE04",
                         borderRadius: "50%",
                         mx: 0.5,
@@ -130,11 +131,11 @@ const Home = () => {
                 </Grid>
               </Paper>
 
-              <Paper elevation={3} sx={{ p: 3 }}>
-                <Typography variant="h5" sx={{ fontWeight: "bold", textAlign: "center", color: "#240E0B" }}>
+              <Paper elevation={3} sx={{ p: { xs: 2, md: 3 }, minHeight: '130px' }}>
+                <Typography variant="h6" sx={{ fontWeight: "bold", textAlign: "center", color: "#240E0B" }}>
                   Motivação do Dia
                 </Typography>
-                <Typography variant="body1" sx={{ mt: 2, textAlign: "center" }}>
+                <Typography variant="body1" sx={{ mt: 2, textAlign: "center", fontSize: { xs: "14px", sm: "16px" } }}>
                   {randomMessage}
                 </Typography>
               </Paper>
