@@ -17,6 +17,7 @@ const Login = () => {
         try {
             const response = await axios.post(`${API_URL}/login`, { email, password });
             localStorage.setItem("token", response.data.token);
+            localStorage.setItem("userEmail", email)
             window.location.href = "/home";
         } catch (err) {
             setError("Credenciais inválidas. Tente novamente.");

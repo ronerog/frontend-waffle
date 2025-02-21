@@ -1,20 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { Box, Typography, Paper, Container, Grid, CircularProgress } from "@mui/material";
 import axios from "axios";
+import Header from "../components/Header";
 
 const API_URL = "https://waffle-production.up.railway.app/streaks";
+const userEmail = localStorage.getItem("userEmail");
+const motivationalMessages = [
+  "Cada dia conta! Continue com sua rotina de leitura!",
+  "Parabéns! Você está construindo um ótimo hábito!",
+  "Persistência é a chave do sucesso! Continue lendo!",
+  "Seu streak está incrível! Mantenha o ritmo!",
+];
 
 const Home = () => {
-  const [streakData, setStreakData] = useState<{ email: string; streak: number; created_at: string }[]>([]);
+  const [streakData, setStreakData] = useState<{ streak: number; created_at: string }[]>([]);
   const [loading, setLoading] = useState(true);
-  const [userEmail] = useState(localStorage.getItem("userEmail") || "ronero@teste");
+  const [randomMessage, setRandomMessage] = useState("");
 
   useEffect(() => {
     const fetchStreaks = async () => {
       try {
-        const response = await axios.get(API_URL);
-        const userStreaks = response.data.filter((item: any) => item.email === userEmail);
-        setStreakData(userStreaks);
+        const response = await axios.get(`${API_URL}/${userEmail}`);
+        setStreakData(response.data);
       } catch (error) {
         console.error("Erro ao buscar os streaks:", error);
       } finally {
@@ -23,82 +30,96 @@ const Home = () => {
     };
 
     fetchStreaks();
-  }, [userEmail]);
+    setRandomMessage(motivationalMessages[Math.floor(Math.random() * motivationalMessages.length)]);
+  }, []);
 
   const streakAtual = streakData.length > 0 ? streakData[0].streak : 0;
-  const historicoAberturas = streakData.map((item) => item.created_at).slice(0, 7);
-
-  const mensagensMotivacionais = [
-    "Mantenha o ritmo! Seu streak está incrível!",
-    "A constância gera resultados, continue assim!",
-    "A leitura diária faz toda a diferença. Não pare agora!",
-  ];
+  const historicoAberturas = streakData.slice(0, 7);
 
   return (
-    <Box
-      sx={{
-        minHeight: 'calc(100vh - 55px)',
-        backgroundColor: "#ffffff",
-        color: "#000000",
-        paddingTop: '55px',
-      }}
-    >
-      <Container maxWidth="md">
-        {loading ? (
-          <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "50vh" }}>
-            <CircularProgress />
-          </Box>
-        ) : (
-          <>
-            {/* Streak Atual */}
-            <Paper elevation={3} sx={{ p: 3, textAlign: "center", mb: 3 }}>
-              <Typography variant="h5" sx={{ fontWeight: "bold", color: "#240E0B" }}>
-                Seu Streak Atual
-              </Typography>
-              <Typography variant="h3" sx={{ color: "#FFCE04", mt: 1 }}>
-                {streakAtual} dias
-              </Typography>
-            </Paper>
+    <>
+      <Header />
+      <Box
+        sx={{
+          minHeight: 'calc(100vh - 55px)',
+          backgroundColor: "#ffffff",
+          color: "#000000",
+          padding: 3,
+        }}
+      >
+        <Container maxWidth="md">
+          {loading ? (
+            <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "50vh" }}>
+              <CircularProgress />
+            </Box>
+          ) : (
+            <>
+              <Paper elevation={3} sx={{ p: 3, textAlign: "center", mb: 3 }}>
+                <Typography variant="h5" sx={{ fontWeight: "bold", color: "#240E0B" }}>
+                  Seu Streak Atual
+                </Typography>
+                <Typography variant="h3" sx={{ color: "#FFCE04", mt: 1 }}>
+                  {streakAtual} dias
+                </Typography>
+              </Paper>
 
-            {/* Histórico de Aberturas */}
-            <Paper elevation={3} sx={{ p: 3, mb: 3 }}>
-              <Typography variant="h5" sx={{ fontWeight: "bold", textAlign: "center", color: "#240E0B" }}>
-                Histórico de Aberturas
-              </Typography>
-              <Grid container justifyContent="center" sx={{ mt: 2 }}>
-                {historicoAberturas.map((date, index) => (
-                  <Box
-                    key={index}
-                    sx={{
-                      width: 20,
-                      height: 20,
-                      backgroundColor: "#4caf50",
-                      borderRadius: "50%",
-                      mx: 0.5,
-                    }}
-                    title={new Date(date).toLocaleDateString()}
-                  />
-                ))}
-              </Grid>
-            </Paper>
+              <Paper elevation={3} sx={{ p: 3, textAlign: "center", mb: 3 }}>
+                <Typography variant="h5" sx={{ fontWeight: "bold", color: "#240E0B" }}>
+                  Progresso de Níveis
+                </Typography>
+                <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
+                  {Array.from({ length: 5 }).map((_, index) => (
+                    <Box
+                      key={index}
+                      sx={{
+                        width: 30,
+                        height: 30,
+                        mx: 1,
+                        borderRadius: "50%",
+                        backgroundColor: index < Math.min(streakAtual, 5) ? "#FFCE04" : "#bdbdbd",
+                      }}
+                    />
+                  ))}
+                </Box>
+                <Typography sx={{ mt: 1 }}>
+                  {streakAtual >= 5 ? "Você atingiu o nível máximo!" : `Continue para chegar ao próximo nível!`}
+                </Typography>
+              </Paper>
 
-            {/* Mensagens Motivacionais */}
-            <Paper elevation={3} sx={{ p: 3 }}>
-              <Typography variant="h5" sx={{ fontWeight: "bold", textAlign: "center", color: "#240E0B" }}>
-                Mantenha o Ritmo!
-              </Typography>
-              <Box sx={{ mt: 2 }}>
-                {mensagensMotivacionais.map((mensagem, index) => (
-                  <Typography key={index} variant="body1" sx={{ mb: 1, textAlign: "center" }}>
-                    {mensagem}
-                  </Typography>
-                ))}
-              </Box>
-            </Paper>
-          </>
-        )}
-      </Container>
-    </Box>
+              <Paper elevation={3} sx={{ p: 3, mb: 3 }}>
+                <Typography variant="h5" sx={{ fontWeight: "bold", textAlign: "center", color: "#240E0B" }}>
+                  Histórico de Aberturas
+                </Typography>
+                <Grid container justifyContent="center" sx={{ mt: 2 }}>
+                  {historicoAberturas.map((item, index) => (
+                    <Box
+                      key={index}
+                      sx={{
+                        width: 20,
+                        height: 20,
+                        backgroundColor: "#FFCE04",
+                        borderRadius: "50%",
+                        mx: 0.5,
+                      }}
+                      title={new Date(item.created_at).toLocaleDateString()}
+                    />
+                  ))}
+                </Grid>
+              </Paper>
+
+              <Paper elevation={3} sx={{ p: 3 }}>
+                <Typography variant="h5" sx={{ fontWeight: "bold", textAlign: "center", color: "#240E0B" }}>
+                  Motivação do Dia
+                </Typography>
+                <Typography variant="body1" sx={{ mt: 2, textAlign: "center" }}>
+                  {randomMessage}
+                </Typography>
+              </Paper>
+            </>
+          )}
+        </Container>
+      </Box>
+    </>
   );
 };
 
