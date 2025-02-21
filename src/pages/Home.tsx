@@ -5,6 +5,7 @@ import Header from "../components/Header";
 
 const API_URL = "https://waffle-production.up.railway.app/streaks";
 const userEmail = localStorage.getItem("userEmail");
+
 const motivationalMessages = [
   "Cada dia conta! Continue com sua rotina de leitura!",
   "Parabéns! Você está construindo um ótimo hábito!",
@@ -39,12 +40,26 @@ const Home = () => {
   return (
     <>
       <Header />
+      <Typography
+        variant="h4"
+        sx={{
+          fontWeight: "bolder",
+          color: "#240E0B",
+          mt: 10,
+          textShadow: "0.5px 0.5px 1.5px white",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        Olá, será que você está informado o suficiente?
+      </Typography>
       <Box
         sx={{
-          minHeight: 'calc(100vh - 55px)',
+          minHeight: "calc(100vh - 55px)",
           backgroundColor: "#ffffff",
           color: "#000000",
-          padding: 3,
+          padding: 15,
         }}
       >
         <Container maxWidth="md">
@@ -60,6 +75,14 @@ const Home = () => {
                 </Typography>
                 <Typography variant="h3" sx={{ color: "#FFCE04", mt: 1 }}>
                   {streakAtual} dias
+                </Typography>
+
+                <Typography sx={{ mt: 1 }}>
+                  {streakAtual === 0
+                    ? "Vamos aumentar esse streak aí, faça já uma leitura diária!"
+                    : streakAtual < 5
+                      ? "Você está indo bem, continue se informando!"
+                      : "Sua informação é mais de 9000! Você está muito informado!"}
                 </Typography>
               </Paper>
 
@@ -82,7 +105,7 @@ const Home = () => {
                   ))}
                 </Box>
                 <Typography sx={{ mt: 1 }}>
-                  {streakAtual >= 5 ? "Você atingiu o nível máximo!" : `Continue para chegar ao próximo nível!`}
+                  {streakAtual >= 10 ? "Você atingiu o nível máximo!" : "Continue para chegar ao próximo nível!"}
                 </Typography>
               </Paper>
 
