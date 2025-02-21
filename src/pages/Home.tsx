@@ -37,10 +37,10 @@ const Home = () => {
   return (
     <Box
       sx={{
-        minHeight: "100vh",
+        minHeight: 'calc(100vh - 55px)',
         backgroundColor: "#ffffff",
         color: "#000000",
-        padding: 3,
+        paddingTop: '55px',
       }}
     >
       <Container maxWidth="md">

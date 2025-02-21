@@ -34,13 +34,12 @@ const Register = () => {
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
-                backgroundColor: "#FFCE04",
-                padding: 2,
+                backgroundColor: "#FFFFF",
             }}
         >
             <Box sx={{ textAlign: "center", mb: 5 }}>
-                <img src={logo} alt="The News Logo" width={90} />
-                <Typography variant="h5" sx={{ fontWeight: "bold", color: "#240E0B", mt: 1 }}>
+                <img src={logo} alt="The News Logo" width={90} style={{borderRadius: '10px' }}/>
+                <Typography variant="h4" sx={{ fontWeight: "bolder", color: "#240E0B", mt: 1, textShadow: "0.5px 0.5px 1.5px white"}}>
                     cadastre sua conta para verificar seus streaks de leitura
                 </Typography>
             </Box>
@@ -52,6 +51,7 @@ const Register = () => {
                         borderRadius: 3,
                         overflow: "hidden",
                         padding: 4,
+                        background: "#FFCE04",
                     }}
                 >
                     <Typography variant="h4" sx={{ fontWeight: "bold", color: "#240E0B", textAlign: "center" }}>
@@ -73,6 +73,12 @@ const Register = () => {
                             margin="normal"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
+                            sx={{
+                                backgroundColor: "white",
+                                "& .MuiOutlinedInput-root": {
+                                  backgroundColor: "white",
+                                },
+                              }}
                         />
 
                         <TextField
@@ -84,6 +90,12 @@ const Register = () => {
                             margin="normal"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
+                            sx={{
+                                backgroundColor: "white",
+                                "& .MuiOutlinedInput-root": {
+                                  backgroundColor: "white",
+                                },
+                              }}
                         />
 
                         <Button
