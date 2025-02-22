@@ -31,7 +31,7 @@ const Header = () => {
                 
                 <Box sx={{ display: "flex", alignItems: "center" }}>
                     <img src={logo} alt="The News" width={40} style={{ borderRadius: "10px", marginRight: 8 }} />
-                    <Typography variant="h6" sx={{ color: "black", fontWeight: "bold" }}>
+                    <Typography variant="h6" sx={{ color: "black" }}>
                         the news
                     </Typography>
                 </Box>
