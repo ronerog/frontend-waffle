@@ -61,13 +61,22 @@ const Header = () => {
     return (
         <AppBar position="static" sx={{ backgroundColor: "white", boxShadow: "none" }}>
             <Toolbar sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-
-                <Box sx={{ display: "flex", alignItems: "center" }}>
-                    <img src={logo} alt="The News" width={40} style={{ borderRadius: "10px", marginRight: 8 }} />
-                    <Typography variant="h6" sx={{ color: "black" }}>
-                        the news
-                    </Typography>
-                </Box>
+                <Button
+                    sx={{
+                        fontFamily: "Poppins",
+                        textTransform: "none",
+                        color: "black",
+                        padding: 1,
+                    }}
+                    onClick={() => navigate("/home")}
+                >
+                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                        <img src={logo} alt="The News" width={40} style={{ borderRadius: "10px", marginRight: 8 }} />
+                        <Typography variant="h6" sx={{ color: "black", fontFamily: "Montserrat" }}>
+                            the news
+                        </Typography>
+                    </Box>
+                </Button>
 
                 <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
                     <Button
