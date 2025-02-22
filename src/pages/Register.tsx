@@ -5,7 +5,7 @@ import logo from "../assets/logo-cafe.png";
 import axios from "axios";
 import React from "react";
 import Footer from "../components/Footer";
-import HeaderAuth from "../components/headerAuth";
+import HeaderAuth from "../components/DefaultHeader";
 
 const API_URL = "https://waffle-production.up.railway.app";
 

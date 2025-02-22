@@ -3,8 +3,9 @@ import { Box, TextField, Button, Typography, Paper, Container } from "@mui/mater
 import axios from "axios";
 import React from "react";
 import logo from "../assets/logo-cafe.png"
-import HeaderAuth from "../components/headerAuth";
 import Footer from "../components/Footer";
+import HeaderAuth from "../components/DefaultHeader";
+
 const API_URL = "https://waffle-production.up.railway.app";
 
 const Login = () => {
