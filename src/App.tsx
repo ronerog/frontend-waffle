@@ -6,6 +6,7 @@ import { isAuthenticated } from "./hooks/useAuth";
 import { JSX } from "react";
 import React from "react";
 import { createTheme, ThemeProvider } from "@mui/material";
+import Dashboard from "./pages/Dashboard";
 
 const PrivateRoute = ({ element }: { element: JSX.Element }) => {
     return isAuthenticated() ? element : <Navigate to="/" />;
@@ -56,6 +57,7 @@ function App() {
                     <Route path="/" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/home" element={<Home />} />
+                    <Route path="/dashboard" element={<Dashboard />} />
                 </Routes>
             </ThemeProvider>
         </BrowserRouter>
