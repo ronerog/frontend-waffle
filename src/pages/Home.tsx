@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Box, Typography, Paper, Container, CircularProgress, LinearProgress, Grid2 } from "@mui/material";
-import { Star } from "@mui/icons-material";
+import { Box, Typography, Paper, Container, CircularProgress, LinearProgress, Grid2, Grid } from "@mui/material";
+import { Star, Today, DateRange, CalendarToday, AllInclusive } from "@mui/icons-material";
 import axios from "axios";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -41,6 +41,12 @@ const Home = () => {
   const nivel = Math.floor(xpAtual / 100);
   const xpParaProximoNivel = 100 - (xpAtual % 100);
   const progressoXP = ((xpAtual % 100) / 100) * 100;
+
+
+  const leiturasHoje = streakData.filter(item => new Date(item.created_at).toDateString() === new Date().toDateString()).length;
+  const leiturasMes = streakData.filter(item => new Date(item.created_at).getMonth() === new Date().getMonth()).length;
+  const leiturasAno = streakData.filter(item => new Date(item.created_at).getFullYear() === new Date().getFullYear()).length;
+
 
   return (
     <>
@@ -83,7 +89,7 @@ const Home = () => {
                 sx={{
                   p: { xs: 2, md: 3 },
                   textAlign: "center",
-                  mb: 10,
+                  mb: 5,
                   minHeight: "150px",
                   display: "flex",
                   flexDirection: "column",
@@ -119,7 +125,98 @@ const Home = () => {
                 </Typography>
               </Grid2>
 
+              <Box
+                sx={{
+                  backgroundColor: "#FFFAE5",
+                  borderRadius: "12px",
+                  p: { xs: 3, md: 4 },
+                  mb: 3,
+                  textAlign: "center",
+                  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+                }}
+              >
+                <Typography variant="h6" sx={{ fontWeight: "bold", color: "#240E0B", mb: 2 }}>
+                  Histórico de Leituras 📊
+                </Typography>
 
+                <Grid container spacing={2} justifyContent="center">
+                  <Grid item xs={6} sm={3}>
+                    <Box
+                      sx={{
+                        backgroundColor: "#FFCE04",
+                        color: "#240E0B",
+                        borderRadius: "8px",
+                        p: 2,
+                        textAlign: "center",
+                        boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.1)",
+                      }}
+                    >
+                      <Today sx={{ fontSize: 30 }} />
+                      <Typography variant="body1" sx={{ fontWeight: "bold", mt: 1 }}>
+                        Hoje
+                      </Typography>
+                      <Typography variant="h6">{leiturasHoje} news</Typography>
+                    </Box>
+                  </Grid>
+
+                  <Grid item xs={6} sm={3}>
+                    <Box
+                      sx={{
+                        backgroundColor: "#FFCE04",
+                        color: "#240E0B",
+                        borderRadius: "8px",
+                        p: 2,
+                        textAlign: "center",
+                        boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.1)",
+                      }}
+                    >
+                      <DateRange sx={{ fontSize: 30 }} />
+                      <Typography variant="body1" sx={{ fontWeight: "bold", mt: 1 }}>
+                        Mensal
+                      </Typography>
+                      <Typography variant="h6">{leiturasMes} news</Typography>
+                    </Box>
+                  </Grid>
+
+                  <Grid item xs={6} sm={3}>
+                    <Box
+                      sx={{
+                        backgroundColor: "#FFCE04",
+                        color: "#240E0B",
+                        borderRadius: "8px",
+                        p: 2,
+                        textAlign: "center",
+                        boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.1)",
+                      }}
+                    >
+                      <CalendarToday sx={{ fontSize: 30 }} />
+                      <Typography variant="body1" sx={{ fontWeight: "bold", mt: 1 }}>
+                        Anual
+                      </Typography>
+                      <Typography variant="h6">{leiturasAno} news</Typography>
+                    </Box>
+                  </Grid>
+
+                  <Grid item xs={6} sm={3}>
+                    <Box
+                      sx={{
+                        backgroundColor: "#FFCE04",
+                        color: "#240E0B",
+                        borderRadius: "8px",
+                        p: 2,
+                        textAlign: "center",
+                        boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.1)",
+                      }}
+                    >
+                      <AllInclusive sx={{ fontSize: 30 }} />
+                      <Typography variant="body1" sx={{ fontWeight: "bold", mt: 1 }}>
+                        Total
+                      </Typography>
+                      <Typography variant="h6">{totalLeituras} news</Typography>
+                    </Box>
+                  </Grid>
+                </Grid>
+              </Box>;
 
               <Paper
                 elevation={3}
