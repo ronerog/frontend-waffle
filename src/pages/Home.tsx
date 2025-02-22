@@ -38,10 +38,28 @@ const Home = () => {
 
   const totalLeituras = streakData.length;
   const xpAtual = totalLeituras * 50;
-  const nivel = Math.floor(xpAtual / 100);
-  const xpParaProximoNivel = 100 - (xpAtual % 100);
-  const progressoXP = ((xpAtual % 100) / 100) * 100;
 
+  function calcularNivel(xp: number): { nivel: number; xpParaProximoNivel: number; progressoXP: number } {
+    let nivel = 0;
+    let xpNecessario = 0;
+
+    while (xp >= xpNecessario) {
+      nivel++;
+      xpNecessario += 100 * Math.pow(nivel, 2);
+    }
+
+    const xpProximoNivel = 100 * Math.pow(nivel, 2);
+    const xpRestante = xpProximoNivel - (xp - (xpNecessario - xpProximoNivel));
+    const progressoXP = ((xp - (xpNecessario - xpProximoNivel)) / xpProximoNivel) * 100;
+
+    return {
+      nivel: nivel - 1,
+      xpParaProximoNivel: xpRestante,
+      progressoXP,
+    };
+  }
+
+  const { nivel, xpParaProximoNivel, progressoXP } = calcularNivel(xpAtual);
 
   const leiturasHoje = streakData.filter(item => new Date(item.created_at).toDateString() === new Date().toDateString()).length;
   const leiturasMes = streakData.filter(item => new Date(item.created_at).getMonth() === new Date().getMonth()).length;
