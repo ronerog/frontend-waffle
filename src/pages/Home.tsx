@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Box, Typography, Paper, Container, Grid, CircularProgress } from "@mui/material";
+import { Box, Typography, Paper, Container, CircularProgress, LinearProgress, Grid2 } from "@mui/material";
 import { Star } from "@mui/icons-material";
 import axios from "axios";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const API_URL = "https://waffle-production.up.railway.app/streaks";
 const userEmail = localStorage.getItem("userEmail");
 
 const motivationalMessages = [
-  "Cada dia conta! Continue com sua rotina de leitura!",
-  "Parabéns! Você está construindo um ótimo hábito!",
-  "Persistência é a chave do sucesso! Continue lendo!",
-  "Seu streak está incrível! Mantenha o ritmo!",
+  "Cada leitura conta! Continue progredindo! 📖",
+  "Ótimo trabalho! Seu XP está aumentando! ⭐",
+  "Continue lendo para alcançar o próximo nível! 🚀",
+  "Sua jornada de conhecimento está incrível! 🏆",
 ];
 
 const Home = () => {
@@ -35,8 +36,11 @@ const Home = () => {
     setRandomMessage(motivationalMessages[Math.floor(Math.random() * motivationalMessages.length)]);
   }, []);
 
-  const streakAtual = streakData.length > 0 ? streakData[0].streak : 0;
-  const historicoAberturas = streakData.slice(0, 7);
+  const totalLeituras = streakData.length;
+  const xpAtual = totalLeituras * 50;
+  const nivel = Math.floor(xpAtual / 100);
+  const xpParaProximoNivel = 100 - (xpAtual % 100);
+  const progressoXP = ((xpAtual % 100) / 100) * 100;
 
   return (
     <>
@@ -58,25 +62,28 @@ const Home = () => {
 
       <Box
         sx={{
-          minHeight: "calc(100vh - 55px)",
           backgroundColor: "#ffffff",
           color: "#000000",
           padding: { xs: 3, sm: 5, md: 10 },
+          display: "flex",
+          flexDirection: { xs: "column", md: "row" },
+          alignItems: "center",
+          justifyContent: "center",
         }}
       >
-        <Container maxWidth="md">
+
+        <Container maxWidth="md" sx={{ flex: 1 }}>
           {loading ? (
             <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "50vh" }}>
               <CircularProgress />
             </Box>
           ) : (
             <>
-              <Paper
-                elevation={3}
+              <Grid2
                 sx={{
                   p: { xs: 2, md: 3 },
                   textAlign: "center",
-                  mb: 3,
+                  mb: 10,
                   minHeight: "150px",
                   display: "flex",
                   flexDirection: "column",
@@ -85,19 +92,34 @@ const Home = () => {
                 }}
               >
                 <Typography variant="h6" sx={{ fontWeight: "bold", color: "#240E0B" }}>
-                  Seu Streak Atual
+                  Nível do Usuário
                 </Typography>
                 <Typography variant="h3" sx={{ color: "#FFCE04", mt: 1 }}>
-                  {streakAtual} dias
+                  {nivel}
                 </Typography>
+
                 <Typography sx={{ mt: 1, fontSize: { xs: "14px", sm: "16px" } }}>
-                  {streakAtual === 0
-                    ? "Vamos aumentar esse streak aí, faça já uma leitura diária!"
-                    : streakAtual < 5
-                    ? "Você está indo bem, continue se informando!"
-                    : "Sua informação é mais de 9000! Você está muito informado!"}
+                  XP: {xpAtual} / {xpAtual + xpParaProximoNivel}
                 </Typography>
-              </Paper>
+
+                <Box sx={{ width: "100%", mt: 2 }}>
+                  <LinearProgress
+                    variant="determinate"
+                    value={progressoXP}
+                    sx={{
+                      height: 10,
+                      borderRadius: 5,
+                      backgroundColor: "#ddd",
+                      "& .MuiLinearProgress-bar": { backgroundColor: "#FFCE04" },
+                    }}
+                  />
+                </Box>
+                <Typography sx={{ mt: 1, fontSize: { xs: "14px", sm: "16px" } }}>
+                  A cada leitura que você faz na nossa news, você ganha 50xp!
+                </Typography>
+              </Grid2>
+
+
 
               <Paper
                 elevation={3}
@@ -122,46 +144,14 @@ const Home = () => {
                       sx={{
                         fontSize: { xs: 30, sm: 40 },
                         mx: 0.5,
-                        color: index < Math.min(streakAtual, 5) ? "#FFCE04" : "#bdbdbd",
+                        color: index < Math.min(nivel, 5) ? "#FFCE04" : "#bdbdbd",
                       }}
                     />
                   ))}
                 </Box>
                 <Typography sx={{ mt: 1, fontSize: { xs: "14px", sm: "16px" } }}>
-                  {streakAtual >= 10 ? "Você atingiu o nível máximo!" : "Continue para chegar ao próximo nível!"}
+                  {xpParaProximoNivel === 0 ? "Você atingiu um novo nível! 🎉" : `Faltam ${xpParaProximoNivel} XP para o próximo nível!`}
                 </Typography>
-              </Paper>
-
-              <Paper
-                elevation={3}
-                sx={{
-                  p: { xs: 2, md: 3 },
-                  mb: 3,
-                  minHeight: "150px",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Typography variant="h6" sx={{ fontWeight: "bold", color: "#240E0B" }}>
-                  Histórico de Aberturas
-                </Typography>
-                <Grid container justifyContent="center" sx={{ mt: 2 }}>
-                  {historicoAberturas.map((item, index) => (
-                    <Box
-                      key={index}
-                      sx={{
-                        width: { xs: 15, sm: 20 },
-                        height: { xs: 15, sm: 20 },
-                        backgroundColor: "#FFCE04",
-                        borderRadius: "50%",
-                        mx: 0.5,
-                      }}
-                      title={new Date(item.created_at).toLocaleDateString()}
-                    />
-                  ))}
-                </Grid>
               </Paper>
 
               <Paper
@@ -186,6 +176,7 @@ const Home = () => {
           )}
         </Container>
       </Box>
+      <Footer />
     </>
   );
 };
