@@ -216,7 +216,7 @@ const Home = () => {
                     </Box>
                   </Grid>
                 </Grid>
-              </Box>;
+              </Box>
 
               <Paper
                 elevation={3}
