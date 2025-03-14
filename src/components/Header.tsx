@@ -71,9 +71,9 @@ const Header = () => {
                     onClick={() => navigate("/home")}
                 >
                     <Box sx={{ display: "flex", alignItems: "center" }}>
-                        <img src={logo} alt="The News" width={40} style={{ borderRadius: "10px", marginRight: 8 }} />
+                        <img src={logo} alt="logo" width={40} style={{ borderRadius: "10px", marginRight: 8 }} />
                         <Typography variant="h6" sx={{ color: "black", fontFamily: "Montserrat" }}>
-                            the news
+                            Xp earn
                         </Typography>
                     </Box>
                 </Button>
@@ -116,7 +116,7 @@ const Header = () => {
                                 Página Inicial
                             </MenuItem>
 
-                            <MenuItem onClick={() => window.open("https://thenewscc.beehiiv.com/", "_blank")} sx={{ color: "black" }}>
+                            <MenuItem onClick={() => window.open("https://www.ronero.com.br/", "_blank")} sx={{ color: "black" }}>
                                 <EmailIcon sx={{ marginRight: 1 }} />
                                 Newsletter
                             </MenuItem>

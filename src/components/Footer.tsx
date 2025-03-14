@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Typography, TextField, Button, IconButton, Container, Grid } from "@mui/material";
 import { Email, Instagram, LinkedIn, Twitter, YouTube, RssFeed } from "@mui/icons-material";
+import logo from "../assets/logo-cafe.png";
 
 const Footer = () => {
   return (
@@ -20,16 +21,16 @@ const Footer = () => {
                   borderRadius: 1,
                 }}
               >
-                <Typography sx={{ fontWeight: "bold", fontSize: 24 }}>☕</Typography>
+                <img src={logo} alt="logo" width={50} style={{ borderRadius: '10px' }} />
               </Box>
               <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-                the news
+                XP Earn
               </Typography>
             </Box>
             <Typography sx={{ mt: 1, fontSize: "14px", maxWidth: 200 }}>
-              tudo que você precisa saber pra começar seu dia bem e informado
+              ganhe xp à medida em que você lê
             </Typography>
-            <Typography sx={{ mt: 2, fontSize: "12px", color: "gray" }}>© 2025 Grupo Waffle.</Typography>
+            <Typography sx={{ mt: 2, fontSize: "12px", color: "gray" }}>©</Typography>
           </Grid>
 
           {/* Links */}
@@ -39,9 +40,6 @@ const Footer = () => {
             </Typography>
             <Typography variant="body2" sx={{ mt: 1, cursor: "pointer" }}>
               Posts
-            </Typography>
-            <Typography variant="body2" sx={{ mt: 1, cursor: "pointer" }}>
-              Newsletters
             </Typography>
           </Grid>
 

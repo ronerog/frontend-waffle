@@ -9,12 +9,12 @@ const HeaderAuth = () => {
                 <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                     <img
                         src={logo}
-                        alt="The News"
+                        alt="logo"
                         width={50}
                         style={{ borderRadius: "10px", objectFit: "contain" }}
                     />
                     <Typography variant="h6" sx={{ color: "black", marginLeft: 1 }}>
-                        the news
+                        xp earn
                     </Typography>
                 </Box>
             </Toolbar>

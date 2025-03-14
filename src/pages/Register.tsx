@@ -42,7 +42,7 @@ const Register = () => {
                 }}
             >
                 <Box sx={{ textAlign: "center", mb: 5 }}>
-                    <img src={logo} alt="The News Logo" width={90} style={{ borderRadius: '10px' }} />
+                    <img src={logo} alt="logo" width={90} style={{ borderRadius: '10px' }} />
                     <Typography variant="h4" sx={{ fontWeight: "bolder", color: "#240E0B", mt: 1, textShadow: "0.5px 0.5px 1.5px white" }}>
                         cadastre sua conta para verificar seus streaks de leitura
                     </Typography>

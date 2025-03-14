@@ -1,4 +1,4 @@
-# Frontend - The News
+# Frontend - XP earns
 
 ## Requisitos
 
